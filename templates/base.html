@@ -1,0 +1,26 @@
+<html>
+<head>
+	<title>Micro</title>
+	<link href='http://fonts.googleapis.com/css?family=Oswald:300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Dancing+Script' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type=text/javascript>
+	  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+	</script>
+</head>
+<body>
+	<div id="header">
+		<h1>@micro</h1>
+		<a href = "index">Home</a> / 
+		{% if username.username %}
+		<a href = "write">Write</a> / 
+		<a href = "logout">Logout</a> /
+		<a href = "calc">Calc</a>
+		{% else %}
+		<a href = "login">Login</a>
+		{% endif %}
+	</div>
+	{% block content %}-{% endblock %}
+</body>
+</html>

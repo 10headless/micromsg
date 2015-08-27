@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='indexStyle.css') }}">
+
+<script type="text/javascript">
+
+	function updateTheSite(){
+		xmlhttp=new XMLHttpRequest();
+		xmlhttp.onreadystatechange=function()
+		  {
+		  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		    {
+		    document.innerHTML=xmlhttp.responseText;
+		    }
+		  }
+		xmlhttp.open("GET", "/update",true);
+		xmlhttp.send();
+	}
+
+	var iFrequency = 20000; // expressed in miliseconds
+	var myInterval = 0;
+    myInterval = setInterval( "updateTheSite()", iFrequency );
+</script>
+
+<div id="posts">
+{% for post in posts %}
+	{% if loop.index is divisibleby(2) %}
+	<div class="black">
+	<div class="blackText">
+	<h1>{{ post.title }}</h1>
+	<p>{{ post.text|safe }}</p>
+	</div>
+	</div>
+	{% else %}
+	<div class="white">
+	<div class="whiteText">
+	<h1>{{ post.title }}</h1>
+	<p>{{ post.text|safe }}</p>
+	</div>
+	</div>
+	{% endif %}
+{% endfor %}
+</div>
+<input type="text">
+{% endblock %}
